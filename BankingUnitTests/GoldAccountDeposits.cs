@@ -5,11 +5,10 @@ namespace BankingUnitTests
 {
     public class GoldAccountDeposits
     {
+
         [Fact]
-        public void GoldAccountsGetABonusOnDeposits()
-        {
-            var account = new BankAccount();
-            account.AccountType = AccountType.Gold;
+        public void GoldAccountsGetBonus(){
+            var account = new GoldAccount();
             var openingBalance = account.GetBalance();
             var amountToDeposit = 100M;
 
