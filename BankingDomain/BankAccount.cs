@@ -9,6 +9,7 @@ namespace BankingDomain
         {
         }
 
+        public AccountType AccountType;
         private decimal _balance = 1000M;
 
         public decimal GetBalance()
@@ -18,7 +19,19 @@ namespace BankingDomain
 
         public void Deposit(decimal amountToDeposit)
         {
-            _balance += amountToDeposit;
+            switch(AccountType)
+            {
+                case AccountType.Standard:
+                    {
+                        _balance += amountToDeposit;
+                        break;
+                    }
+                case AccountType.Gold:
+                    {
+                        _balance += amountToDeposit * 1.10M;
+                        break;
+                    }
+            }
         }
 
         public void Withdrawl(decimal amountToWithdrawl)
