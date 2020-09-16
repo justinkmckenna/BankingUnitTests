@@ -1,5 +1,6 @@
 ﻿using BankingDomain;
 using BankingUnitTests.TestDoubles;
+using Moq;
 using Xunit;
 
 namespace BankingUnitTests
@@ -9,7 +10,7 @@ namespace BankingUnitTests
         [Fact]
         public void WithdrawlDecreasesBalance()
         {
-            var account = new BankAccount(new DummyBonusCalculator());
+            var account = new BankAccount(new DummyBonusCalculator(), new Mock<INotifyTheFeds>().Object);
             var openingBalance = account.GetBalance();
             var amountToWithdrawl = 1M;
 
@@ -21,7 +22,7 @@ namespace BankingUnitTests
         [Fact]
         public void CanTakeAllYourMoney()
         {
-            var account = new BankAccount(new DummyBonusCalculator());
+            var account = new BankAccount(new DummyBonusCalculator(), new Mock<INotifyTheFeds>().Object);
 
             account.Withdrawl(account.GetBalance());
 

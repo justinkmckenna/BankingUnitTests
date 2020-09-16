@@ -8,10 +8,12 @@ namespace BankingDomain
 
         private decimal _balance = 1000M;
         private ICalculateBankAccountBonuses _bonusCalculator;
+        private INotifyTheFeds _fedNotifier;
 
-        public BankAccount(ICalculateBankAccountBonuses bonusCalculator)
+        public BankAccount(ICalculateBankAccountBonuses bonusCalculator, INotifyTheFeds fedNotifier)
         {
             _bonusCalculator = bonusCalculator;
+            _fedNotifier = fedNotifier;
         }
 
         public decimal GetBalance()
@@ -32,6 +34,9 @@ namespace BankingDomain
                 throw new OverdraftException();
             }
             _balance -= amountToWithdrawl;
+
+            // notify the feds
+            _fedNotifier.NotifyOfWithdrawl(this, amountToWithdrawl);
         }
     }
 }

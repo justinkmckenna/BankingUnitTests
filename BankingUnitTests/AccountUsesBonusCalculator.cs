@@ -14,8 +14,9 @@ namespace BankingUnitTests
         public void BonusIsAppliedToTheDeposit()
         {
             var stubbedBonusCalculator = new Mock<ICalculateBankAccountBonuses>();
-            stubbedBonusCalculator.Setup(c => c.GetDepositFor(1000, 500)).Returns(42);
-            var account = new BankAccount(stubbedBonusCalculator.Object);
+            stubbedBonusCalculator.Setup(c => c.GetDepositFor(1000, 500)).Returns(42); 
+            // moq: can test range for 500, eg. range from 400-500 using It.isinrange
+            var account = new BankAccount(stubbedBonusCalculator.Object, new Mock<INotifyTheFeds>().Object);
             var openingBalance = account.GetBalance();
 
             account.Deposit(500);

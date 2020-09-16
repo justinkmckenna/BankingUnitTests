@@ -12,7 +12,7 @@ namespace BankingUnitTests
         {
             // WTCYWYH - write the code you wish you had
             // Given
-            var account = new BankAccount(new Mock<ICalculateBankAccountBonuses>().Object);
+            var account = new BankAccount(new Mock<ICalculateBankAccountBonuses>().Object, new Mock<INotifyTheFeds>().Object);
 
             // When
             decimal balance = account.GetBalance();
