@@ -2,7 +2,6 @@
 
 namespace BankingDomain
 {
-    public enum AccountType { Standard, Gold }
     public class BankAccount
     {
         public BankAccount()
