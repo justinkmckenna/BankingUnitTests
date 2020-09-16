@@ -1,4 +1,5 @@
 ﻿using BankingDomain;
+using BankingUnitTests.TestDoubles;
 using Newtonsoft.Json.Bson;
 using System.Threading;
 using Xunit;
@@ -11,7 +12,7 @@ namespace BankingUnitTests
          public void DepositIncreasedBalance()
         {
             // given
-            var account = new BankAccount();
+            var account = new BankAccount(new DummyBonusCalculator());
             var openingBalance = account.GetBalance();
             var amountToDeposit = 5M;
 

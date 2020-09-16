@@ -1,4 +1,5 @@
 ﻿using BankingDomain;
+using BankingUnitTests.TestDoubles;
 using Xunit;
 
 namespace BankingUnitTests
@@ -14,7 +15,7 @@ namespace BankingUnitTests
         [Fact]
         public void BalanceStaysTheSame()
         {
-            var account = new BankAccount();
+            var account = new BankAccount(new DummyBonusCalculator());
             var openingBalance = account.GetBalance();
 
             try
@@ -32,7 +33,7 @@ namespace BankingUnitTests
         [Fact]
         public void OverdraftGivesException()
         {
-            var account = new BankAccount();
+            var account = new BankAccount(new DummyBonusCalculator());
             var openingBalance = account.GetBalance();
 
             Assert.Throws<OverdraftException>(() => account.Withdrawl(openingBalance + 1M));
