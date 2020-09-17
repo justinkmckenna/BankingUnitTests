@@ -5,24 +5,19 @@ using System.Windows.Forms;
 
 namespace BankKiosk
 {
-    public partial class Form1 : Form, INotifyTheFeds
+    public partial class Form1 : Form
     {
         BankAccount _account;
-        public Form1()
+        public Form1(BankAccount account)
         {
             InitializeComponent();
-            _account = new BankAccount(new StandardBonusCalculator(new StandardCutoffClock(new SystemTime())), this);
+            _account = account;
             UpdateUi();
         }
 
         private void UpdateUi()
         {
             this.Text = $"Your balance is {_account.GetBalance():c}";
-        }
-
-        public void NotifyOfWithdrawl(BankAccount bankAccount, decimal amountToWithdrawl)
-        {
-            MessageBox.Show($"Notifying the feds of your withdrawl of {amountToWithdrawl:c}");
         }
 
         private void btnDeposit_Click(object sender, EventArgs e)
